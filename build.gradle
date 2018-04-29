@@ -1,0 +1,83 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.10.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.kyls'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+webAppDirName = 'webapp'    // 设置 WebApp 根目录 默认为"src/webapp"
+// 设置 Java 源码所在目录
+sourceSets {
+  main {
+      java {
+          srcDir 'java'
+      }
+      resources {
+          srcDir 'resources'
+      }
+  }
+}
+
+war {
+	// 对war包的设置， 最后生成war包的名字。 默认为 setting.gradle里的name +version
+	baseName = "kyls_backend"
+
+}
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.session:spring-session')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-starter-data-rest")
+	compile('org.springframework.boot:spring-boot-starter-data-redis')
+	compile("org.springframework.boot:spring-boot-starter-jdbc")
+	//compile('org.springframework.boot:spring-boot-starter-velocity')
+	compile('org.springframework.boot:spring-boot-starter-cache')
+	compile("org.springframework.boot:spring-boot-starter-aop")
+	compile("org.springframework.boot:spring-boot-starter-tomcat")
+	runtime('mysql:mysql-connector-java')
+	compile('org.quartz-scheduler:quartz:2.2.3')
+	compile('com.aliyun.oss:aliyun-sdk-oss:2.2.3')
+	compile("org.springframework.boot:spring-boot-devtools")
+	compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
+	compile( 'com.alibaba:fastjson:1.2.31')
+	compile 'redis.clients:jedis:2.9.0'
+	compile 'org.projectlombok:lombok:1.16.20'
+	compile 'com.google.guava:guava:24.0-jre'
+	compile('com.fasterxml.jackson.core:jackson-core:2.7.4')
+	compile('com.fasterxml.jackson.core:jackson-databind:2.7.4')
+	compile('com.fasterxml.jackson.core:jackson-annotations:2.7.4')
+	compile group: 'com.aliyun', name: 'aliyun-java-sdk-core', version: '3.2.6'
+	compile group: 'com.aliyun.oss', name: 'aliyun-sdk-oss', version: '2.7.0'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.4'
+	compile group: 'com.aliyun', name: 'aliyun-java-sdk-cloudphoto', version: '1.1.8'
+	compile('org.apache.httpcomponents:fluent-hc:4.5.2')
+}
+
+def defaultEncoding = 'UTF-8'
+compileJava {
+	options.encoding = defaultEncoding
+}
+compileTestJava {
+	options.encoding = defaultEncoding
+}

@@ -1,0 +1,10 @@
+*.exe
+*.tmp
+.idea
+*.exe~
+build
+logs
+gradle
+out
+tomcat
+.gradle
